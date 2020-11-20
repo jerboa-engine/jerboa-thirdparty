@@ -1,0 +1,54 @@
+workspace "jeroba-thirdparty"
+    architecture "x64"
+    targetdir "build"
+
+    configurations 
+	{ 
+		"Debug"
+	}
+
+    startproject "Sandbox"
+
+externalproject "spdlog"
+    location "../spdlog/build"
+    kind "StaticLib"
+    language "C++"
+
+    filter "system:windows"
+        filename "spdlog"
+    
+project "Sandbox"
+	kind "ConsoleApp"
+	language "C++"
+	cppdialect "C++17"
+	staticruntime "on"
+
+    outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
+	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+	files
+	{
+	    "src/**.h", 
+		"src/**.c", 
+		"src/**.hpp", 
+		"src/**.cpp" 
+	}
+
+	includedirs
+	{
+        "src",
+        "thirdparty",
+		"../spdlog/include"
+	}
+
+	links
+	{
+		"spdlog"
+	}
+
+	filter "system:windows"
+	  	systemversion "latest"
+
+	filter "configurations:Debug"
+	   	symbols "On"

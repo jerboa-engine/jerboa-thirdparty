@@ -15,8 +15,8 @@ This repo contains all thirdparty libraries used by [**Jeroba**](https://github.
 ## Libraries
 
 ### spdlog
-* **Upstream:** https://github.com/gabime/spdlog
-* **Version**: v1.x
-* **Last commit:** https://github.com/gabime/spdlog/commit/eebb921c9fffb87d3d279a12c81a6cd7a8efe5b6
+* **Upstream:** https://github.com/gabime/spdlog/releases/tag/v1.8.1
+* **Version**: 1.8.1
 * **License:** MIT
+* **Build system:** CMake >=3.10
 * **Custom changes:** -
