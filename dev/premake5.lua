@@ -9,13 +9,7 @@ workspace "jeroba-thirdparty"
 
     startproject "Sandbox"
 
-externalproject "spdlog"
-    location "../spdlog/build"
-    kind "StaticLib"
-    language "C++"
-
-    filter "system:windows"
-        filename "spdlog"
+include "../"
     
 project "Sandbox"
 	kind "ConsoleApp"
