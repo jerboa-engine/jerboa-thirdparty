@@ -9,4 +9,12 @@ pushd spdlog\build
 cmake ..
 popd
 
+:: glfw
+if not exist "glfw\build" (
+    mkdir glfw\build
+)
+pushd glfw\build
+cmake ..
+popd
+
 popd

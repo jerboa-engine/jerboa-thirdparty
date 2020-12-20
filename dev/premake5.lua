@@ -33,12 +33,14 @@ project "Sandbox"
 	{
         "src",
         "thirdparty",
-		"../spdlog/include"
+		"../spdlog/include",
+		"../glfw/include"
 	}
 
 	links
 	{
-		"spdlog"
+		"spdlog",
+		"glfw"
 	}
 
 	filter "system:windows"
