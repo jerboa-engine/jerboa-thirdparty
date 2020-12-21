@@ -1,2 +1,10 @@
-glfw/build
-spdlog/build
+# Binary files
+**/bin-int
+**/bin
+
+# Visual studio project files
+.vs/
+**.sln
+**.vcxproj
+**.vcxproj.filters
+**.vcxproj.user
