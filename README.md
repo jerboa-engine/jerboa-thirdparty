@@ -20,3 +20,10 @@ This repo contains all thirdparty libraries used by [**Jeroba**](https://github.
 * **License:** MIT
 * **Build system:** CMake >=3.10
 * **Custom changes:** -
+
+### glfw
+* **Upstream:** https://github.com/glfw/glfw/releases/tag/3.3.2
+* **Version**: 3.3.2
+* **License:** MIT
+* **Build system:** CMake >=3.10
+* **Custom changes:** -
