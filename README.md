@@ -25,5 +25,12 @@ This repo contains all thirdparty libraries used by [**Jeroba**](https://github.
 * **Upstream:** https://github.com/glfw/glfw/releases/tag/3.3.2
 * **Version**: 3.3.2
 * **License:** MIT
-* **Build system:** CMake >=3.10
+* **Build system:** Premake 5
+* **Custom changes:** -
+
+### glad
+* **Upstream:** https://github.com/Dav1dde/glad
+* **Version**: OpenGL 3.3
+* **License:** MIT
+* **Build system:** Premake 5
 * **Custom changes:** -
