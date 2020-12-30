@@ -8,4 +8,5 @@ externalproject "spdlog"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
-include "./glfw"
+include "glfw"
+include "glad"
