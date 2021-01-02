@@ -34,3 +34,10 @@ This repo contains all thirdparty libraries used by [**Jeroba**](https://github.
 * **License:** MIT
 * **Build system:** Premake 5
 * **Custom changes:** -
+
+### ImGui
+* **Upstream:** https://github.com/ocornut/imgui/commit/7b53551032f5fdd7371afe4ca7e4fb607a12ea34
+* **Version**: Beta release
+* **License:** MIT
+* **Build system:** Premake 5
+* **Custom changes:** -
