@@ -14,11 +14,18 @@ This repo contains all thirdparty libraries used by [**Jeroba**](https://github.
 5. Merge the upgrade branch into **main** (preferably with a pull request)
 ## Libraries
 
-### spdlog
-* **Upstream:** https://github.com/gabime/spdlog/releases/tag/v1.8.1
-* **Version**: 1.8.1
+### assimp
+* **Upstream:** https://github.com/assimp/assimp/releases/tag/v5.0.1
+* **Version**: 5.0.1
+* **License:** https://github.com/assimp/assimp/blob/master/LICENSE
+* **Build system:** Premake 5
+* **Custom changes:** -
+
+### glad
+* **Upstream:** https://github.com/Dav1dde/glad
+* **Version**: OpenGL 3.3
 * **License:** MIT
-* **Build system:** CMake >=3.10
+* **Build system:** Premake 5
 * **Custom changes:** -
 
 ### glfw
@@ -28,9 +35,23 @@ This repo contains all thirdparty libraries used by [**Jeroba**](https://github.
 * **Build system:** Premake 5
 * **Custom changes:** -
 
-### glad
-* **Upstream:** https://github.com/Dav1dde/glad
-* **Version**: OpenGL 3.3
+### glm
+* **Upstream:** https://github.com/g-truc/glm/releases/tag/0.9.9.8
+* **Version**: 0.9.9.8
 * **License:** MIT
-* **Build system:** Premake 5
+* **Build system:** -
+* **Custom changes:** -
+
+### spdlog
+* **Upstream:** https://github.com/gabime/spdlog/releases/tag/v1.8.1
+* **Version**: 1.8.1
+* **License:** MIT
+* **Build system:** CMake >=3.10
+* **Custom changes:** -
+
+### stb_image
+* **Upstream:** https://github.com/nothings/stb/blob/master/stb_image.h
+* **Version**: 2.26
+* **License:** MIT
+* **Build system:** -
 * **Custom changes:** -
