@@ -7,6 +7,9 @@ if not exist "spdlog\build" (
 )
 pushd spdlog\build
 cmake ..
+cmake --build . --config Debug
+cmake --build . --config Release
+cmake --build . --config RelWithDebInfo
 popd
 
 :: assimp
