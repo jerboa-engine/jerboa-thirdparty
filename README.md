@@ -14,18 +14,11 @@ This repo contains all thirdparty libraries used by [**Jeroba**](https://github.
 5. Merge the upgrade branch into **main** (preferably with a pull request)
 ## Libraries
 
-### spdlog
-* **Upstream:** https://github.com/gabime/spdlog/releases/tag/v1.8.1
-* **Version**: 1.8.1
-* **License:** MIT
-* **Build system:** CMake >=3.10
-* **Custom changes:** -
-
-### glfw
-* **Upstream:** https://github.com/glfw/glfw/releases/tag/3.3.2
-* **Version**: 3.3.2
-* **License:** MIT
-* **Build system:** Premake 5
+### assimp
+* **Upstream:** https://github.com/assimp/assimp/releases/tag/v5.0.1
+* **Version**: 5.0.1
+* **License:** https://github.com/assimp/assimp/blob/master/LICENSE
+* **Build system:** CMake >=3.0
 * **Custom changes:** -
 
 ### glad
@@ -35,9 +28,30 @@ This repo contains all thirdparty libraries used by [**Jeroba**](https://github.
 * **Build system:** Premake 5
 * **Custom changes:** -
 
-### ImGui
-* **Upstream:** https://github.com/ocornut/imgui/commit/7b53551032f5fdd7371afe4ca7e4fb607a12ea34
-* **Version**: Beta release
+### glfw
+* **Upstream:** https://github.com/glfw/glfw/releases/tag/3.3.2
+* **Version**: 3.3.2
 * **License:** MIT
 * **Build system:** Premake 5
+* **Custom changes:** -
+
+### glm
+* **Upstream:** https://github.com/g-truc/glm/releases/tag/0.9.9.8
+* **Version**: 0.9.9.8
+* **License:** MIT
+* **Build system:** -
+* **Custom changes:** -
+
+### spdlog
+* **Upstream:** https://github.com/gabime/spdlog/releases/tag/v1.8.1
+* **Version**: 1.8.1
+* **License:** MIT
+* **Build system:** CMake >=3.10
+* **Custom changes:** -
+
+### stb_image
+* **Upstream:** https://github.com/nothings/stb/blob/master/stb_image.h
+* **Version**: 2.26
+* **License:** MIT
+* **Build system:** -
 * **Custom changes:** -
