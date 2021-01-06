@@ -18,7 +18,7 @@ This repo contains all thirdparty libraries used by [**Jeroba**](https://github.
 * **Upstream:** https://github.com/assimp/assimp/releases/tag/v5.0.1
 * **Version**: 5.0.1
 * **License:** https://github.com/assimp/assimp/blob/master/LICENSE
-* **Build system:** Premake 5
+* **Build system:** CMake >=3.0
 * **Custom changes:** -
 
 ### glad

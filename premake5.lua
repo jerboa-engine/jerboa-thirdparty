@@ -1,3 +1,11 @@
+externalproject "assimp"
+    location "assimp/build/code"
+    kind "StaticLib"
+    language "C++"
+
+    filter "system:windows"
+        filename "assimp"
+
 externalproject "spdlog"
     location "spdlog/build"
     kind "StaticLib"
