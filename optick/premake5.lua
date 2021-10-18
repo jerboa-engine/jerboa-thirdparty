@@ -19,7 +19,7 @@ newoption {
 }
 
 if not _ACTION then
-	_ACTION="vs2017"
+	_ACTION="vs2019"
 end
 
 outFolderRoot = "bin/" .. _ACTION .. "/";
@@ -29,7 +29,7 @@ isUWP = false
 isDX12 = false
 isVulkan = false
 
-if _ACTION == "vs2010" or _ACTION == "vs2012" or _ACTION == "vs2015" or _ACTION == "vs2017" then
+if _ACTION == "vs2010" or _ACTION == "vs2012" or _ACTION == "vs2015" or _ACTION == "vs2017" or _ACTION == "vs2019" then
 	isVisualStudio = true
 end
 
@@ -60,14 +60,14 @@ if isUWP then
 	outputFolder = outputFolder .. "_UWP"
 end
 
-solution "Optick"
-	language "C++"
-if _ACTION == "vs2017" then
-	systemversion "latest"
-end
-	startproject "ConsoleApp"
+-- solution "Optick"
+-- 	language "C++"
+-- if _ACTION == "vs2019" then
+-- 	systemversion "latest"
+-- end
+-- 	startproject "ConsoleApp"
 if isVisualStudio then
-    	cppdialect "C++11"
+    	cppdialect "C++17"
 else
 	cppdialect "gnu++11"
 end
@@ -111,14 +111,15 @@ if _ACTION == "vs2010" then
 defines { "_DISABLE_DEPRECATE_STATIC_CPPLIB", "_STATIC_CPPLIB"}
 end
 
-configuration "Release"
-	targetdir(outFolderRoot .. "/Native/Release")
+targetdir ("bin/%{cfg.buildcfg}")
+objdir ("bin-int/%{cfg.buildcfg}")
+
+configuration { "Release", "Staging" }
 	defines { "NDEBUG", "MT_INSTRUMENTED_BUILD" }
 	flags { optimization_flags }
     optimize "Speed"
 
 configuration "Debug"
-	targetdir(outFolderRoot .. "/Native/Debug")
 	defines { "_DEBUG", "_CRTDBG_MAP_ALLOC", "MT_INSTRUMENTED_BUILD" }
 
 configuration "linux"
@@ -150,6 +151,9 @@ end
 
  	kind "SharedLib"
  	defines { "OPTICK_EXPORTS" }
+
+	targetdir ("bin/%{cfg.buildcfg}")
+    objdir ("bin-int/%{cfg.buildcfg}")
 
 	includedirs
 	{
@@ -195,184 +199,184 @@ end
 		},
 	}
 	
-group "Samples"
-if isFibersEnabled then
-	project "TaskScheduler"
-		excludes { "samples/Common/TaskScheduler/Scheduler/Source/MTDefaultAppInterop.cpp", }
-		kind "StaticLib"
-		flags {"NoPCH"}
-		defines {"USE_OPTICK=1"}
-		files {
-			"samples/Common/TaskScheduler/Scheduler/**.*", 
-		}
+-- group "Samples"
+-- if isFibersEnabled then
+-- 	project "TaskScheduler"
+-- 		excludes { "samples/Common/TaskScheduler/Scheduler/Source/MTDefaultAppInterop.cpp", }
+-- 		kind "StaticLib"
+-- 		flags {"NoPCH"}
+-- 		defines {"USE_OPTICK=1"}
+-- 		files {
+-- 			"samples/Common/TaskScheduler/Scheduler/**.*", 
+-- 		}
 
-		includedirs
-		{
-			"samples/Common/TaskScheduler/Scheduler/Include",
-			"src"
-		}
+-- 		includedirs
+-- 		{
+-- 			"samples/Common/TaskScheduler/Scheduler/Include",
+-- 			"src"
+-- 		}
 
-		excludes { "Src/Platform/Posix/**.*" }
+-- 		excludes { "Src/Platform/Posix/**.*" }
 		
-		links {
-			"OptickCore",
-		}
-end
+-- 		links {
+-- 			"OptickCore",
+-- 		}
+-- end
 
-if isUWP then
-	-- Genie can't generate proper UWP application
-	-- It's a dummy project to match existing project file
-	project "DurangoUWP"
-		location( "samples/DurangoUWP" )
-		kind "WindowedApp"
-		uuid "5CA6AF66-C2CB-412E-B335-B34357F2FBB6"
-		files {
-			"samples/DurangoUWP/**.*", 
-		}
-else
-	project "ConsoleApp"
-		flags {"NoPCH"}
-		kind "ConsoleApp"
-		uuid "C50A1240-316C-EF4D-BAD9-3500263A260D"
-		files {
-			"samples/ConsoleApp/**.*", 
-			"samples/Common/TestEngine/**.*",
-		}
+-- if isUWP then
+-- 	-- Genie can't generate proper UWP application
+-- 	-- It's a dummy project to match existing project file
+-- 	project "DurangoUWP"
+-- 		location( "samples/DurangoUWP" )
+-- 		kind "WindowedApp"
+-- 		uuid "5CA6AF66-C2CB-412E-B335-B34357F2FBB6"
+-- 		files {
+-- 			"samples/DurangoUWP/**.*", 
+-- 		}
+-- else
+-- 	project "ConsoleApp"
+-- 		flags {"NoPCH"}
+-- 		kind "ConsoleApp"
+-- 		uuid "C50A1240-316C-EF4D-BAD9-3500263A260D"
+-- 		files {
+-- 			"samples/ConsoleApp/**.*", 
+-- 			"samples/Common/TestEngine/**.*",
+-- 		}
 		
-		includedirs {
-			"src",
-			"samples/Common/TestEngine",
-			"samples/Common/TaskScheduler/Scheduler/Include"
-		}
+-- 		includedirs {
+-- 			"src",
+-- 			"samples/Common/TestEngine",
+-- 			"samples/Common/TaskScheduler/Scheduler/Include"
+-- 		}
 		
-		links {
-			"OptickCore"
-		}
+-- 		links {
+-- 			"OptickCore"
+-- 		}
 
-		vpaths { 
-			["*"] = "samples/ConsoleApp"
-		}
-end
+-- 		vpaths { 
+-- 			["*"] = "samples/ConsoleApp"
+-- 		}
+-- end
 
-	project "ConsoleAppMT"
-		flags {"NoPCH"}
-		kind "ConsoleApp"
-		uuid "C50A1240-316C-EF4D-BAD9-3500263A260E"
-		files {
-			"samples/ConsoleAppMT/**.*", 
-			"samples/Common/TestEngine/**.*",
-		}
+-- 	project "ConsoleAppMT"
+-- 		flags {"NoPCH"}
+-- 		kind "ConsoleApp"
+-- 		uuid "C50A1240-316C-EF4D-BAD9-3500263A260E"
+-- 		files {
+-- 			"samples/ConsoleAppMT/**.*", 
+-- 			"samples/Common/TestEngine/**.*",
+-- 		}
 		
-		includedirs {
-			"src",
-			"samples/Common/TestEngine",
-			"samples/Common/TaskScheduler/Scheduler/Include"
-		}
+-- 		includedirs {
+-- 			"src",
+-- 			"samples/Common/TestEngine",
+-- 			"samples/Common/TaskScheduler/Scheduler/Include"
+-- 		}
 		
-		links {
-			"OptickCore"
-		}
+-- 		links {
+-- 			"OptickCore"
+-- 		}
 
-		vpaths { 
-			["*"] = "samples/ConsoleAppMT"
-		}
+-- 		vpaths { 
+-- 			["*"] = "samples/ConsoleAppMT"
+-- 		}
 
 
-if isDX12 then
-	project "WindowsD3D12"
-		entrypoint "WinMainCRTStartup"
-		flags {"NoPCH"}
-		kind "WindowedApp"
-		uuid "D055326C-F1F3-4695-B7E2-A683077BE4DF"
+-- if isDX12 then
+-- 	project "WindowsD3D12"
+-- 		entrypoint "WinMainCRTStartup"
+-- 		flags {"NoPCH"}
+-- 		kind "WindowedApp"
+-- 		uuid "D055326C-F1F3-4695-B7E2-A683077BE4DF"
 
-		buildoptions { 
-		"/wd4324", -- structure was padded due to alignment specifier
-		"/wd4238"  -- nonstandard extension used: class rvalue used as lvalue
-		}
+-- 		buildoptions { 
+-- 		"/wd4324", -- structure was padded due to alignment specifier
+-- 		"/wd4238"  -- nonstandard extension used: class rvalue used as lvalue
+-- 		}
 		
-		links { 
-			"d3d12", 
-			"dxgi",
-			"d3dcompiler"
-		}
+-- 		links { 
+-- 			"d3d12", 
+-- 			"dxgi",
+-- 			"d3dcompiler"
+-- 		}
 		
-		files {
-			"samples/WindowsD3D12/**.h", 
-			"samples/WindowsD3D12/**.cpp", 
-		}
+-- 		files {
+-- 			"samples/WindowsD3D12/**.h", 
+-- 			"samples/WindowsD3D12/**.cpp", 
+-- 		}
 		
-		includedirs {
-			"src",
-		}
+-- 		includedirs {
+-- 			"src",
+-- 		}
 		
-		links {
-			"OptickCore",
-		}
+-- 		links {
+-- 			"OptickCore",
+-- 		}
 		
-		vpaths { 
-			["*"] = "samples/WindowsD3D12" 
-		}
-end
+-- 		vpaths { 
+-- 			["*"] = "samples/WindowsD3D12" 
+-- 		}
+-- end
 
-if isVulkan then
-	project "WindowsVulkan"
-		entrypoint "WinMainCRTStartup"
-		flags {"NoPCH"}
-		kind "WindowedApp"
-		uuid "07A250C4-4432-45FE-9E63-BB7F71B7C14C"
+-- if isVulkan then
+-- 	project "WindowsVulkan"
+-- 		entrypoint "WinMainCRTStartup"
+-- 		flags {"NoPCH"}
+-- 		kind "WindowedApp"
+-- 		uuid "07A250C4-4432-45FE-9E63-BB7F71B7C14C"
 
-		defines {
-			"VK_USE_PLATFORM_WIN32_KHR", 
-			"NOMINMAX", 
-			"_USE_MATH_DEFINES",
-			"VK_EXAMPLE_DATA_DIR=\"" .. os.getcwd() .. "/Samples/WindowsVulkan/data/\"",
-		}
+-- 		defines {
+-- 			"VK_USE_PLATFORM_WIN32_KHR", 
+-- 			"NOMINMAX", 
+-- 			"_USE_MATH_DEFINES",
+-- 			"VK_EXAMPLE_DATA_DIR=\"" .. os.getcwd() .. "/Samples/WindowsVulkan/data/\"",
+-- 		}
 		
-		buildoptions { 
-			"/wd4201", -- nonstandard extension used: class rvalue used as lvalue
-			"/wd4458", -- declaration of '***' hides class member
-			"/wd4018", -- '<': signed/unsigned mismatch
-			"/wd4267", -- 'argument': conversion from 'size_t' to 'uint32_t'
-			"/wd4244", -- 'initializing': conversion from 'double' to 'float', possible loss of data
-			"/wd4189", -- local variable is initialized but not referenced
-			"/wd4100", -- unreferenced formal parameter
-			"/wd4189", -- local variable is initialized but not referenced
-			"/wd4456", -- declaration of '***' hides previous local declaration
-			"/wd4700", -- uninitialized local variable '***' used
-			"/wd4702", -- unreachable code
-		}
+-- 		buildoptions { 
+-- 			"/wd4201", -- nonstandard extension used: class rvalue used as lvalue
+-- 			"/wd4458", -- declaration of '***' hides class member
+-- 			"/wd4018", -- '<': signed/unsigned mismatch
+-- 			"/wd4267", -- 'argument': conversion from 'size_t' to 'uint32_t'
+-- 			"/wd4244", -- 'initializing': conversion from 'double' to 'float', possible loss of data
+-- 			"/wd4189", -- local variable is initialized but not referenced
+-- 			"/wd4100", -- unreferenced formal parameter
+-- 			"/wd4189", -- local variable is initialized but not referenced
+-- 			"/wd4456", -- declaration of '***' hides previous local declaration
+-- 			"/wd4700", -- uninitialized local variable '***' used
+-- 			"/wd4702", -- unreachable code
+-- 		}
 	
-		files {
-			"samples/WindowsVulkan/**.*", 
-		}
+-- 		files {
+-- 			"samples/WindowsVulkan/**.*", 
+-- 		}
 		
-		includedirs {
-			"$(VULKAN_SDK)/Include",
-			"Samples/WindowsVulkan",
-			"Samples/WindowsVulkan/base",
-			"src",
-		}
+-- 		includedirs {
+-- 			"$(VULKAN_SDK)/Include",
+-- 			"Samples/WindowsVulkan",
+-- 			"Samples/WindowsVulkan/base",
+-- 			"src",
+-- 		}
 		
-		libdirs {
-			"$(VULKAN_SDK)/Lib",
-			"samples/WindowsVulkan/libs/assimp",
-		}
+-- 		libdirs {
+-- 			"$(VULKAN_SDK)/Lib",
+-- 			"samples/WindowsVulkan/libs/assimp",
+-- 		}
 
-		links { 
-			"vulkan-1",
-			"assimp",
-		}
+-- 		links { 
+-- 			"vulkan-1",
+-- 			"assimp",
+-- 		}
 		
-		links {
-			"OptickCore",
-		}
+-- 		links {
+-- 			"OptickCore",
+-- 		}
 		
-		vpaths { 
-			["*"] = "samples/WindowsVulkan" 
-		}
+-- 		vpaths { 
+-- 			["*"] = "samples/WindowsVulkan" 
+-- 		}
 		
-		if isVisualStudio then
-			fullPath = os.getcwd() .. "\\samples\\WindowsVulkan\\"
-			postbuildcommands { "copy \"" .. fullPath .. "dll\\assimp-vc140-mt.dll\" \"" .. fullPath .. "$(OutputPath)\\assimp-vc140-mt.dll\" /Y" }
-		end
-end
+-- 		if isVisualStudio then
+-- 			fullPath = os.getcwd() .. "\\samples\\WindowsVulkan\\"
+-- 			postbuildcommands { "copy \"" .. fullPath .. "dll\\assimp-vc140-mt.dll\" \"" .. fullPath .. "$(OutputPath)\\assimp-vc140-mt.dll\" /Y" }
+-- 		end
+-- end
