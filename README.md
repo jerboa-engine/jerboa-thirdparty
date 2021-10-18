@@ -55,3 +55,10 @@ This repo contains all thirdparty libraries used by [**Jeroba**](https://github.
 * **License:** MIT
 * **Build system:** -
 * **Custom changes:** -
+
+### Optick
+* **Upstream:** https://github.com/bombomby/optick/releases/tag/1.3.1.0
+* **Version**: 1.31
+* **License:** MIT
+* **Build system:** Premake 5
+* **Custom changes:** Changes to the premake file
